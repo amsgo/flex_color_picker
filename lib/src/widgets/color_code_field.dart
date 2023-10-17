@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -98,6 +100,7 @@ class _ColorCodeFieldState extends State<ColorCodeField> {
   late FocusNode textFocusNode;
   late String colorHexCode;
   late Color color;
+  bool _showCopyConfirmation = false;
 
   @override
   void initState() {
@@ -239,7 +242,7 @@ class _ColorCodeFieldState extends State<ColorCodeField> {
               ),
               isDense: true,
               contentPadding: EdgeInsetsDirectional.only(start: fontSize),
-              prefixText: _editColorPrefix,
+              prefixText: _showCopyConfirmation ? '' : _editColorPrefix,
               prefixStyle: effectivePrefixStyle,
               filled: true,
               fillColor: fieldBackground,
@@ -326,6 +329,13 @@ class _ColorCodeFieldState extends State<ColorCodeField> {
     }
     final ClipboardData data = ClipboardData(text: colorString);
     await Clipboard.setData(data);
+    textController.text =
+        widget.copyPasteBehavior.copyConfirmation ?? 'Copied!';
+    setState(() => _showCopyConfirmation = true);
+    Timer(const Duration(seconds: 1), () {
+      textController.text = color.hex;
+      setState(() => _showCopyConfirmation = false);
+    });
   }
 
   // Get the current selected color prefix format for the input field.

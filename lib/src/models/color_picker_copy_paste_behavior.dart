@@ -65,6 +65,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
       this.pasteIcon = Icons.paste,
       this.copyTooltip,
       this.pasteTooltip,
+      this.copyConfirmation,
       this.copyFormat = ColorPickerCopyFormat.dartCode,
       this.longPressMenu = false,
       this.secondaryMenu = false,
@@ -172,6 +173,8 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
   /// If CTRL-V pasting is also enabled, the string ' (CTRL-V)' is added
   /// on Linux and Windows platforms and on macOS ' (CMD-V)' is added.
   final String? pasteTooltip;
+
+  final String? copyConfirmation;
 
   /// Defines the format of the copied color code string.
   ///
@@ -355,6 +358,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
     IconData? pasteIcon,
     String? copyTooltip,
     String? pasteTooltip,
+    String? copyConfirmation,
     ColorPickerCopyFormat? copyFormat,
     bool? longPressMenu,
     bool? secondaryMenu,
@@ -382,6 +386,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
       pasteIcon: pasteIcon ?? this.pasteIcon,
       copyTooltip: copyTooltip ?? this.copyTooltip,
       pasteTooltip: pasteTooltip ?? this.pasteTooltip,
+      copyConfirmation: copyConfirmation ?? this.copyConfirmation,
       copyFormat: copyFormat ?? this.copyFormat,
       longPressMenu: longPressMenu ?? this.longPressMenu,
       secondaryMenu: secondaryMenu ?? this.secondaryMenu,
@@ -418,6 +423,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
         pasteIcon == other.pasteIcon &&
         copyTooltip == other.copyTooltip &&
         pasteTooltip == other.pasteTooltip &&
+        copyConfirmation == other.copyConfirmation &&
         copyFormat == other.copyFormat &&
         longPressMenu == other.longPressMenu &&
         secondaryMenu == other.secondaryMenu &&
@@ -449,6 +455,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
         pasteIcon,
         copyTooltip,
         pasteTooltip,
+        copyConfirmation,
         copyFormat,
         longPressMenu,
         secondaryMenu,
@@ -479,6 +486,7 @@ class ColorPickerCopyPasteBehavior with Diagnosticable {
     properties.add(DiagnosticsProperty<IconData>('pasteIcon', pasteIcon));
     properties.add(StringProperty('copyTooltip', copyTooltip));
     properties.add(StringProperty('pasteTooltip', pasteTooltip));
+    properties.add(StringProperty('copyConfirmation', copyConfirmation));
     properties
         .add(EnumProperty<ColorPickerCopyFormat>('copyFormat', copyFormat));
     properties.add(DiagnosticsProperty<bool>('longPressMenu', longPressMenu));
